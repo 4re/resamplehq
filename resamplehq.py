@@ -1,6 +1,6 @@
-import vapoursynth as vs
+from vapoursynth import core, RGB, RGBH, RGBH
 
-__version__ = '2.1.0'
+__version__ = '2.1.1'
 
 
 def resample_hq(clip, width=None, height=None, kernel='spline36', matrix=None, matrix_dst=None,
@@ -43,7 +43,6 @@ def resample_hq(clip, width=None, height=None, kernel='spline36', matrix=None, m
             output clips. Manually set settings will be used instead of hdr automatic ones.
             Keep in mind this is not a color grading tool and should not be used as such.
     """
-    core = vs.get_core()
 
     # Cheks
 
@@ -105,7 +104,7 @@ def resample_hq(clip, width=None, height=None, kernel='spline36', matrix=None, m
                            filter_param_a=filter_param_a, filter_param_b=filter_param_b)
 
     if range_in is None:
-        if clip.format.color_family == vs.RGB:
+        if clip.format.color_family == RGB:
             range_in = 'full'
         else:
             range_in = 'limited'
@@ -132,9 +131,9 @@ def resample_hq(clip, width=None, height=None, kernel='spline36', matrix=None, m
     orig_format = clip.format.id
 
     if precision == 1:
-        tmp_format = vs.RGBS
+        tmp_format = RGBS
     else:
-        tmp_format = vs.RGBH
+        tmp_format = RGBH
 
     to_tmp_format_opts = dict(format=tmp_format, range_in_s=range_in, range_s='full',
                               transfer_in_s=transfer, transfer_s='linear')
@@ -142,7 +141,7 @@ def resample_hq(clip, width=None, height=None, kernel='spline36', matrix=None, m
     to_orig_format_opts = dict(format=orig_format, transfer_in_s='linear', range_in_s='full', range_s=range_in,
                                transfer_s=transfer_dst)
 
-    if clip.format.color_family != vs.RGB:
+    if clip.format.color_family != RGB:
         to_tmp_format_opts.update(matrix_in_s=matrix)
         to_orig_format_opts.update(matrix_s=matrix_dst)
 
