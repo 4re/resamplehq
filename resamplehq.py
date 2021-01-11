@@ -1,6 +1,6 @@
 from vapoursynth import core, RGB, RGBH, RGBS
 
-__version__ = '2.1.1'
+__version__ = '2.1.2'
 
 
 def resample_hq(clip, width=None, height=None, kernel='spline36', matrix=None, matrix_dst=None,
