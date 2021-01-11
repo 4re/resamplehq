@@ -1,4 +1,4 @@
-from vapoursynth import core, RGB, RGBH, RGBH
+from vapoursynth import core, RGB, RGBH, RGBS
 
 __version__ = '2.1.1'
 
